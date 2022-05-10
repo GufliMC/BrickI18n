@@ -45,14 +45,7 @@ allprojects {
 
 
 configure(subprojects.findAll {it.name.contains('-api')}) {
-    apply plugin: 'com.github.johnrengelman.shadow'
     apply plugin: 'maven-publish'
-
-    shadowJar {
-        archiveClassifier.set("${project.name}")
-        archiveBaseName.set("${rootProject.name}")
-        archiveVersion.set("${rootProject.version}")
-    }
 
     publishing {
         repositories {

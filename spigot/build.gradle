@@ -1,7 +1,5 @@
-jar {
-    manifest {
-        attributes 'Main-Class': 'com.guflimc.brick.i18n.spigot.SpigotBrickI18n'
-    }
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 repositories {
@@ -13,4 +11,10 @@ dependencies {
     implementation project(':spigot-api')
 
     compileOnly 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
+}
+
+shadowJar {
+    archiveClassifier.set("")
+    archiveBaseName.set("${rootProject.name}-${project.name}")
+    archiveVersion.set("${rootProject.version}")
 }
