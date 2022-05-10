@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.guflimc.brick.i18n.minestom"},{"l":"com.guflimc.brick.i18n.minestom.namespace"}];updateSearchResults();

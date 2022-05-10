@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.guflimc.brick.i18n.spigot","l":"SpigotBrickI18n"},{"p":"com.guflimc.brick.i18n.spigot","l":"SpigotI18nAPI"},{"p":"com.guflimc.brick.i18n.spigot.namespace","l":"SpigotNamespace"},{"p":"com.guflimc.brick.i18n.spigot.namespace","l":"SpigotNamespaceRegistry"}];updateSearchResults();
