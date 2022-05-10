@@ -1,11 +1,15 @@
 # BrickI18n
 
-An extension for [Minestom](https://github.com/Minestom/Minestom) with a translation api.
+A Minecraft library that makes localization easier than every.
+
+## Platforms
+
+* [x] Minestom
+* [x] Spigot / Paper
 
 ## Install
 
-Get the [release](https://github.com/MinestomBrick/BrickI18n/releases)
-and place it in the extension folder of your minestom server.
+Get the [release](https://github.com/GufliMC/BrickI18n/releases) and put it in your plugins/extensions folder.
 
 ## API
 
@@ -18,27 +22,31 @@ repositories {
 
 ```
 dependencies {
-    implementation 'org.minestombrick.translations:api:1.0-SNAPSHOT'
+    // minestom
+    compileOnly 'com.guflimc.brick.i18n:minestom:1.0-SNAPSHOT'
+    
+    // spigot
+    implementation 'com.guflimc.brick.i18n:spigot:1.0-SNAPSHOT'
 }
 ```
 
 ### Usage
 
-Check the [javadocs](https://minestombrick.github.io/BrickI18n/)
+Check the [javadocs](https://guflimc.github.io/BrickI18n/)
 
 #### Examples
 
 ```java
 // Initialize
-I18nNamespace namespace = new I18nNamespace(this, Locale.ENGLISH);
+SpigotNamespace namespace = new SpigotNamespace(this, Locale.ENGLISH);
 namespace.loadValues(namespace, "languages");
 
-I18n.get().register(namespace); // easy access later
+SpigotI18nAPI.get().register(namespace); // easy access later
 
 // Usage
 namespace.send(player, "welcome", sender.getName());
 
-I18nAPI.get().byId("ExtensionName").send(player, "welcome", sender.getName());
+SpigotI18nAPI.get().byId("PluginName").send(player, "welcome", sender.getName());
 ```
 
 resources/languages/en.json

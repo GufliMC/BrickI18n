@@ -26,8 +26,12 @@ public class MinestomNamespace extends StandardNamespace {
 
     private final Logger LOGGER = LoggerFactory.getLogger(MinestomNamespace.class);
 
-    public MinestomNamespace(String id, Locale defaultLocale) {
+    MinestomNamespace(String id, Locale defaultLocale) {
         super(id, defaultLocale);
+    }
+
+    public MinestomNamespace(Extension extension, Locale defaultLocale) {
+        super(extension.getOrigin().getName(), defaultLocale);
     }
 
     // Localizable support

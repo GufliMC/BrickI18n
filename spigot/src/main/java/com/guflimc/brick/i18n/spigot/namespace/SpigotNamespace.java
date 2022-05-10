@@ -21,8 +21,12 @@ public class SpigotNamespace extends StandardNamespace {
 
     private final Logger LOGGER = LoggerFactory.getLogger(SpigotNamespace.class);
 
-    public SpigotNamespace(String id, Locale defaultLocale) {
+    SpigotNamespace(String id, Locale defaultLocale) {
         super(id, defaultLocale);
+    }
+
+    public SpigotNamespace(JavaPlugin plugin, Locale defaultLocale) {
+        super(plugin.getName(), defaultLocale);
     }
 
     public final void loadValues(JavaPlugin plugin, String pathToResources) {
