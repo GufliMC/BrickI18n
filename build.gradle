@@ -1,8 +1,9 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-group 'org.minestombrick.i18n'
+group 'com.guflimc.brick.i18n'
 version '1.0-SNAPSHOT'
 
 compileJava {
@@ -25,9 +26,55 @@ subprojects {
 
     repositories {
         mavenCentral()
-
-        maven { url 'https://jitpack.io' }
         maven { url 'https://repo.spongepowered.org/maven' }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+
+     dependencies {
+         implementation 'org.jetbrains:annotations:23.0.0'
+
+         compileOnly 'com.google.code.gson:gson:2.9.0'
+         compileOnly 'org.slf4j:slf4j-api:1.7.36'
+
+         compileOnly 'net.kyori:adventure-api:4.10.1'
+         compileOnly 'net.kyori:adventure-text-minimessage:4.10.1'
+         compileOnly 'net.kyori:adventure-text-serializer-plain:4.10.1'
+
+         // TESTING
+         testImplementation 'com.google.code.gson:gson:2.9.0'
+         testImplementation 'org.slf4j:slf4j-api:1.7.36'
+         testImplementation 'net.kyori:adventure-api:4.10.1'
+         testImplementation 'net.kyori:adventure-text-minimessage:4.10.1'
+         testImplementation 'net.kyori:adventure-text-serializer-plain:4.10.1'
+         testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+     }
+}
+
+configure(subprojects.findAll {it.name != 'api'}) {
+    apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'maven-publish'
+
+    shadowJar {
+        archiveClassifier.set("")
+        archiveBaseName.set("${rootProject.name}")
+        archiveVersion.set("${rootProject.version}")
+    }
+
+    publishing {
+        repositories {
+            maven {
+                name = "Jorisg"
+                url = uri("https://repo.jorisg.com/snapshots")
+                credentials(org.gradle.api.credentials.PasswordCredentials)
+            }
+        }
+
+        publications {
+            release(MavenPublication) {
+                from components.java
+                groupId = rootProject.group
+                artifactId = project.name
+                version = rootProject.version
+            }
+        }
     }
 }

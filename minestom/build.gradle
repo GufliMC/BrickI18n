@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.guflimc.brick.i18n.minestom.BrickI18n'
+    }
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation project(':api')
+
+    compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
+}
