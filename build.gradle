@@ -1,17 +1,17 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2' }
+    }
+}
+
 plugins {
-    id 'java'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group 'com.guflimc.brick.i18n'
 version '1.0-SNAPSHOT'
 
-compileJava {
-    sourceCompatibility = 1.17
-    targetCompatibility = 1.17
-}
-
-subprojects {
+allprojects {
     apply plugin: 'java'
 
     sourceCompatibility = 1.17
@@ -54,7 +54,7 @@ configure(subprojects.findAll {it.name != 'api'}) {
     apply plugin: 'maven-publish'
 
     shadowJar {
-        archiveClassifier.set("")
+        archiveClassifier.set("${project.name}")
         archiveBaseName.set("${rootProject.name}")
         archiveVersion.set("${rootProject.version}")
     }
