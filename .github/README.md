@@ -32,7 +32,10 @@ dependencies {
 
 ### Usage
 
-Check the [javadocs](https://guflimc.github.io/BrickI18n/)
+#### Javadocs
+
+* [Minestom](https://guflimc.github.io/BrickI18n/minestom)
+* [Spigot](https://guflimc.github.io/BrickI18n/spigot)
 
 #### Examples
 
