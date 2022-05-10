@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.guflimc.brick.i18n.spigot"},{"l":"com.guflimc.brick.i18n.spigot.namespace"}];updateSearchResults();
