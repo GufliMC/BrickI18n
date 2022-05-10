@@ -3,4 +3,6 @@ rootProject.name = 'BrickI18n'
 include 'api'
 include 'minestom'
 include 'spigot'
+include 'minestom-api'
+include 'spigot-api'
 

@@ -1,7 +1,7 @@
-package com.guflimc.brick.i18n.spigot;
+package com.guflimc.brick.i18n.spigot.api;
 
-import com.guflimc.brick.i18n.spigot.namespace.SpigotNamespace;
-import com.guflimc.brick.i18n.spigot.namespace.SpigotNamespaceRegistry;
+import com.guflimc.brick.i18n.spigot.api.namespace.SpigotNamespace;
+import com.guflimc.brick.i18n.spigot.api.namespace.SpigotNamespaceRegistry;
 
 public class SpigotI18nAPI {
 

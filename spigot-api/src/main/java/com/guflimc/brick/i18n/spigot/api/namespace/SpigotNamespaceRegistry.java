@@ -1,4 +1,4 @@
-package com.guflimc.brick.i18n.spigot.namespace;
+package com.guflimc.brick.i18n.spigot.api.namespace;
 
 import com.guflimc.brick.i18n.api.NamespaceRegistry;
 import org.bukkit.Bukkit;

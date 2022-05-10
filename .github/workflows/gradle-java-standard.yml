@@ -1,4 +1,4 @@
-name: Gradle test, build and upload artifact
+name: Gradle test, publish, javadoc and release
 
 on:
   push:
@@ -20,9 +20,12 @@ jobs:
     uses: GufliOfficial/.github/.github/workflows/java-gradle-multi-javadoc.yml@main
     with:
       projects: |
-        minestom
-        spigot
+        minestom-api
+        spigot-api
 
   pre-release:
     needs: test
     uses: GufliOfficial/.github/.github/workflows/java-gradle-github-release.yml@main
+    files: |
+      minestom/build/libs/*.jar
+      spigot/build/libs/*.jar

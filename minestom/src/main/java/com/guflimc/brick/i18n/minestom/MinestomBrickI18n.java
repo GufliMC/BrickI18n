@@ -1,7 +1,8 @@
 package com.guflimc.brick.i18n.minestom;
 
-import com.guflimc.brick.i18n.minestom.namespace.MinestomNamespace;
-import com.guflimc.brick.i18n.minestom.namespace.MinestomNamespaceRegistry;
+import com.guflimc.brick.i18n.minestom.api.MinestomI18nAPI;
+import com.guflimc.brick.i18n.minestom.api.namespace.MinestomNamespace;
+import com.guflimc.brick.i18n.minestom.api.namespace.MinestomNamespaceRegistry;
 import net.minestom.server.extensions.Extension;
 
 public class MinestomBrickI18n extends Extension {

@@ -1,7 +1,7 @@
-package com.guflimc.brick.i18n.minestom.namespace;
+package com.guflimc.brick.i18n.minestom.api.namespace;
 
 import com.guflimc.brick.i18n.api.namespace.StandardNamespace;
-import com.guflimc.brick.i18n.minestom.MinestomI18nAPI;
+import com.guflimc.brick.i18n.minestom.api.MinestomI18nAPI;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
@@ -26,7 +26,7 @@ public class MinestomNamespace extends StandardNamespace {
 
     private final Logger LOGGER = LoggerFactory.getLogger(MinestomNamespace.class);
 
-    MinestomNamespace(String id, Locale defaultLocale) {
+    public MinestomNamespace(String id, Locale defaultLocale) {
         super(id, defaultLocale);
     }
 

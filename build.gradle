@@ -1,9 +1,3 @@
-buildscript {
-    repositories {
-        maven { url 'https://plugins.gradle.org/m2' }
-    }
-}
-
 plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
@@ -49,7 +43,8 @@ allprojects {
      }
 }
 
-configure(subprojects.findAll {it.name != 'api'}) {
+
+configure(subprojects.findAll {it.name.contains('-api')}) {
     apply plugin: 'com.github.johnrengelman.shadow'
     apply plugin: 'maven-publish'
 

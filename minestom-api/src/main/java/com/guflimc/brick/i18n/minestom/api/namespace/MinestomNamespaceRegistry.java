@@ -1,4 +1,4 @@
-package com.guflimc.brick.i18n.minestom.namespace;
+package com.guflimc.brick.i18n.minestom.api.namespace;
 
 import com.guflimc.brick.i18n.api.NamespaceRegistry;
 import net.minestom.server.extensions.ExtensionClassLoader;

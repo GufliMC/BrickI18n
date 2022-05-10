@@ -13,7 +13,8 @@ Get the [release](https://github.com/GufliMC/BrickI18n/releases) and put it in y
 
 ## API
 
-### Maven
+### Gradle
+
 ```
 repositories {
     maven { url "https://repo.jorisg.com/snapshots" }
@@ -23,18 +24,19 @@ repositories {
 ```
 dependencies {
     // minestom
-    compileOnly 'com.guflimc.brick.i18n:minestom:1.0-SNAPSHOT'
+    compileOnly 'com.guflimc.brick.i18n:minestom-api:1.0-SNAPSHOT'
     
     // spigot
-    implementation 'com.guflimc.brick.i18n:spigot:1.0-SNAPSHOT'
+    implementation 'com.guflimc.brick.i18n:spigot-api:1.0-SNAPSHOT'
 }
 ```
 
-### Usage
+### Javadocs
 
-Check the [javadocs](https://guflimc.github.io/BrickI18n/)
+* [Minestom](https://guflimc.github.io/BrickI18n/minestom-api)
+* [Spigot](https://guflimc.github.io/BrickI18n/spigot-api)
 
-#### Examples
+### Examples
 
 ```java
 // Initialize

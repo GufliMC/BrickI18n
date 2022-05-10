@@ -1,7 +1,8 @@
 package com.guflimc.brick.i18n.spigot;
 
-import com.guflimc.brick.i18n.spigot.namespace.SpigotNamespace;
-import com.guflimc.brick.i18n.spigot.namespace.SpigotNamespaceRegistry;
+import com.guflimc.brick.i18n.spigot.api.SpigotI18nAPI;
+import com.guflimc.brick.i18n.spigot.api.namespace.SpigotNamespace;
+import com.guflimc.brick.i18n.spigot.api.namespace.SpigotNamespaceRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SpigotBrickI18n extends JavaPlugin {
