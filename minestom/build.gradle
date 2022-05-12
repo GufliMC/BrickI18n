@@ -1,5 +1,5 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'com.guflimc.minestom.extensionsetup' version '+'
 }
 
 repositories {
@@ -11,10 +11,10 @@ dependencies {
     implementation project(':minestom-api')
 
     compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
+
+    library 'net.kyori:adventure-text-minimessage:4.10.1'
 }
 
-shadowJar {
-    archiveClassifier.set("")
-    archiveBaseName.set("${rootProject.name}-${project.name}")
-    archiveVersion.set("${rootProject.version}")
+minestomExtension {
+    entrypoint = "com.guflimc.brick.placeholders.minestom.MinestomBrickPlaceholders"
 }

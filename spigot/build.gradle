@@ -1,5 +1,5 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'net.minecrell.plugin-yml.bukkit' version '0.5.1'
 }
 
 repositories {
@@ -11,10 +11,21 @@ dependencies {
     implementation project(':spigot-api')
 
     compileOnly 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
+
+    // shade
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'net.kyori:adventure-api:4.10.1'
+    implementation 'net.kyori:adventure-text-minimessage:4.10.1'
+    implementation 'net.kyori:adventure-text-serializer-plain:4.10.1'
 }
 
-shadowJar {
-    archiveClassifier.set("")
-    archiveBaseName.set("${rootProject.name}-${project.name}")
-    archiveVersion.set("${rootProject.version}")
+bukkit {
+    name = rootProject.name
+    main = 'com.guflimc.brick.i18n.spigot.SpigotBrickI18n'
+    description = 'Simple and lightweight internationalisation library for mc 1.18+'
+    author = 'GufliMC'
+    website = 'https://github.com/GufliMC/BrickI18n'
 }
+
+// I want it nice like that
+generateBukkitPluginDescription.group = "minecraft"

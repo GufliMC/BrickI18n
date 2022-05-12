@@ -24,17 +24,16 @@ repositories {
 ```
 dependencies {
     // minestom
-    compileOnly 'com.guflimc.brick.i18n:minestom-api:1.0-SNAPSHOT'
+    compileOnly 'com.guflimc.brick.i18n:minestom-api:+'
     
     // spigot
-    implementation 'com.guflimc.brick.i18n:spigot-api:1.0-SNAPSHOT'
+    compileOnly 'com.guflimc.brick.i18n:spigot-api:+'
 }
 ```
 
 ### Javadocs
 
-* [Minestom](https://guflimc.github.io/BrickI18n/minestom-api)
-* [Spigot](https://guflimc.github.io/BrickI18n/spigot-api)
+You can find the javadocs for all platforms [here](https://guflimc.github.io/BrickI18n)
 
 ### Examples
 
