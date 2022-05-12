@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.guflimc.brick.i18n.minestom.api","l":"MinestomI18nAPI"},{"p":"com.guflimc.brick.i18n.minestom.api.namespace","l":"MinestomNamespace"},{"p":"com.guflimc.brick.i18n.minestom.api.namespace","l":"MinestomNamespaceRegistry"}];updateSearchResults();
