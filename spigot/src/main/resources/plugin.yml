@@ -1,5 +1,0 @@
-name: 'BrickI18n'
-author: 'GufliMC'
-version: ${pluginVersion}
-main: com.guflimc.brick.i18n.spigot.SpigotBrickI18n
-api-version: 1.13
