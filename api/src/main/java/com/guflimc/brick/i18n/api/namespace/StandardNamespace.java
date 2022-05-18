@@ -3,10 +3,13 @@ package com.guflimc.brick.i18n.api.namespace;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.guflimc.brick.i18n.api.objectmapper.ObjectMapper;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.JoinConfiguration;
 import net.kyori.adventure.text.TranslatableComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.translation.TranslationRegistry;
 
 import java.io.IOException;
@@ -16,8 +19,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.text.MessageFormat;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StandardNamespace {
 
@@ -81,14 +86,13 @@ public class StandardNamespace {
 
     protected final TranslatableComponent translatable(String key, Object... args) {
         Component[] cargs = new Component[args.length];
-        for (int i = 0; i < args.length; i++) {
-            if (args[i] == null) {
+        for ( int i = 0; i < args.length; i++ ) {
+            if ( args[i] == null ) {
                 cargs[i] = Component.text("null");
-            } else if (args[i] instanceof Component comp) {
-                cargs[i] = comp;
-            } else {
-                cargs[i] = Component.text(args[i].toString());
+                continue;
             }
+
+            cargs[i] = ObjectMapper.map(args[i]);
         }
 
         return Component.translatable(key).args(cargs);

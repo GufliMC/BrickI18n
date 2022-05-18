@@ -21,5 +21,6 @@ dependencies {
 }
 
 minestomExtension {
-    entrypoint = "com.guflimc.brick.placeholders.minestom.MinestomBrickPlaceholders"
+    name = rootProject.name
+    entrypoint = "com.guflimc.brick.i18n.minestom.MinestomBrickI18n"
 }
