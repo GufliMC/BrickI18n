@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 
 public class SpigotNamespace extends StandardNamespace {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(SpigotNamespace.class);
+    private static final Logger logger = LoggerFactory.getLogger(SpigotNamespace.class);
 
     SpigotNamespace(String id, Locale defaultLocale) {
         super(id, defaultLocale);
@@ -119,7 +119,7 @@ public class SpigotNamespace extends StandardNamespace {
                         Files.createDirectories(targetFile.getParent());
                         Files.copy(is, targetFile, StandardCopyOption.REPLACE_EXISTING);
                     } catch (IOException ex) {
-                        LOGGER.warn("Cannot save packaged resource '" + path + "' of plugin '" + plugin.getName() + "'.");
+                        logger.warn("Cannot save packaged resource '" + path + "' of plugin '" + plugin.getName() + "'.");
                     }
                     continue;
                 }

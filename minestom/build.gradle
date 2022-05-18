@@ -16,6 +16,7 @@ dependencies {
     // shadow
     implementation (project(':minestom-api')) {
         exclude group: 'com.google.code.gson'
+        exclude group: 'net.kyori' // provided by platform
     }
 }
 

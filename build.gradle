@@ -19,17 +19,9 @@ subprojects {
         mavenCentral()
         maven { url 'https://repo.spongepowered.org/maven' }
     }
-
-    dependencies {
-        compileOnly 'org.slf4j:slf4j-api:1.7.36'
-
-        compileOnly 'net.kyori:adventure-api:4.10.1'
-        compileOnly 'net.kyori:adventure-text-minimessage:4.10.1'
-        compileOnly 'net.kyori:adventure-text-serializer-plain:4.10.1'
-    }
 }
 
 apply from: 'https://guflimc.github.io/scripts/gradle/subprojects-default.gradle'
 apply from: 'https://guflimc.github.io/scripts/gradle/subprojects-javadoc.gradle'
 apply from: 'https://guflimc.github.io/scripts/gradle/subprojects-shadow.gradle'
-apply from: 'https://guflimc.github.io/scripts/gradle/subprojects-publish-shadow.gradle'
+apply from: 'https://guflimc.github.io/scripts/gradle/subprojects-publish.gradle'
