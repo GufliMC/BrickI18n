@@ -7,16 +7,15 @@ repositories {
 }
 
 dependencies {
-    implementation project(':api')
-    implementation project(':spigot-api')
-
+    // provided by platform
     compileOnly 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
 
-    // shade
-    implementation 'com.google.code.gson:gson:2.9.0'
-    implementation 'net.kyori:adventure-api:4.10.1'
-    implementation 'net.kyori:adventure-text-minimessage:4.10.1'
-    implementation 'net.kyori:adventure-text-serializer-plain:4.10.1'
+    // shadow
+    implementation (project(':spigot-api')) {
+        exclude group: 'com.google.code.gson'
+    }
+    implementation 'net.kyori:adventure-api:4.+'
+    implementation 'net.kyori:adventure-text-minimessage:4.+'
 }
 
 bukkit {

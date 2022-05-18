@@ -8,8 +8,6 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.translation.TranslationRegistry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,8 +20,6 @@ import java.util.Locale;
 import java.util.Map;
 
 public class StandardNamespace {
-
-    private final Logger LOGGER = LoggerFactory.getLogger(StandardNamespace.class);
 
     protected final TranslationRegistry registry;
     protected final Locale defaultLocale;

@@ -7,12 +7,16 @@ repositories {
 }
 
 dependencies {
-    implementation project(':api')
-    implementation project(':minestom-api')
-
+    // provided by platform
     compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
 
-    library 'net.kyori:adventure-text-minimessage:4.10.1'
+    // external dependency
+    library 'net.kyori:adventure-text-minimessage:+'
+
+    // shadow
+    implementation (project(':minestom-api')) {
+        exclude group: 'com.google.code.gson'
+    }
 }
 
 minestomExtension {

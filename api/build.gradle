@@ -1,10 +1,9 @@
-
-test {
-    useJUnitPlatform()
+plugins {
+    id 'java-library'
 }
 
 dependencies {
-    compileOnly 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     testImplementation 'com.google.code.gson:gson:2.9.0'
     testImplementation 'org.slf4j:slf4j-api:1.7.36'
@@ -12,4 +11,8 @@ dependencies {
     testImplementation 'net.kyori:adventure-text-minimessage:4.10.1'
     testImplementation 'net.kyori:adventure-text-serializer-plain:4.10.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+test {
+    useJUnitPlatform()
 }

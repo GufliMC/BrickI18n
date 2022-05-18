@@ -1,5 +1,6 @@
 package com.guflimc.brick.i18n.spigot.api;
 
+import com.guflimc.brick.i18n.api.I18nAPI;
 import com.guflimc.brick.i18n.spigot.api.namespace.SpigotNamespace;
 import com.guflimc.brick.i18n.spigot.api.namespace.SpigotNamespaceRegistry;
 
@@ -9,6 +10,7 @@ public class SpigotI18nAPI {
 
     public static void setNamespaceRegistry(SpigotNamespaceRegistry registry) {
         namespaceRegistry = registry;
+        I18nAPI.setNamespaceRegistry(registry);
     }
 
     //
