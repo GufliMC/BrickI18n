@@ -3,6 +3,7 @@ package com.guflimc.brick.i18n.api.namespace;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.guflimc.brick.i18n.api.I18nAPI;
 import com.guflimc.brick.i18n.api.objectmapper.ObjectMapper;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.key.Key;
@@ -51,9 +52,12 @@ public class StandardNamespace {
     public Component translate(Locale locale, TranslatableComponent component) {
         if (registry.contains(component.key()) ) {
             return renderer.render(component, locale);
-        } else {
-            return Component.text(""); //I18nAPI.global().translate(locale, component);
         }
+        if ( I18nAPI.global() == this ) {
+            return Component.text("null - message does not exist.", NamedTextColor.RED);
+        }
+
+        return I18nAPI.global().translate(locale, component);
     }
 
     public final Component translate(Locale locale, String key) {
