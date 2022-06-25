@@ -1,6 +1,6 @@
 # BrickI18n
 
-A Minecraft library that makes localization easier than every.
+A Minecraft library that makes localization easier than ever.
 
 ## Platforms
 
