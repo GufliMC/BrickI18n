@@ -1,12 +1,18 @@
 package com.guflimc.brick.i18n.spigot.api.namespace;
 
+import com.guflimc.brick.i18n.api.namespace.ExtendedNamespace;
 import com.guflimc.brick.i18n.api.namespace.StandardNamespace;
-import com.guflimc.brick.i18n.spigot.api.SpigotI18nAPI;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,61 +23,32 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.*;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Stream;
 
-public class SpigotNamespace extends StandardNamespace {
+public class SpigotNamespace extends ExtendedNamespace<Player> {
 
     private static final Logger logger = LoggerFactory.getLogger(SpigotNamespace.class);
 
-    SpigotNamespace(String id, Locale defaultLocale) {
+    private final BukkitAudiences adventure;
+
+    SpigotNamespace(String id, JavaPlugin plugin, Locale defaultLocale) {
         super(id, defaultLocale);
+        adventure = BukkitAudiences.create(plugin);
     }
 
     public SpigotNamespace(JavaPlugin plugin, Locale defaultLocale) {
-        super(plugin.getName(), defaultLocale);
-    }
-
-    // Localizable support
-
-    public Component translate(Player player, TranslatableComponent component) {
-        return translate(Locale.forLanguageTag(player.getLocale()), component);
-    }
-
-    public final Component translate(Player player, String key) {
-        return translate(player, Component.translatable(key));
-    }
-
-    public final Component translate(Player player, String key, Object... args) {
-        return translate(player, translatable(key, args));
-    }
-
-    public final Component translate(Player player, String key, Component... args) {
-        return translate(player, translatable(key, args));
-    }
-
-    // override
-
-    @Override
-    public Component translate(Locale locale, TranslatableComponent component) {
-        if (registry.contains(component.key()) ) {
-            return renderer.render(component, locale);
-        }
-        if ( id.equals("global") ) {
-            return Component.text("");
-        }
-        return SpigotI18nAPI.global().translate(locale, component);
+        this(plugin.getName(), plugin, defaultLocale);
     }
 
     @Override
-    public void send(Audience sender, TranslatableComponent component) {
-        if ( sender instanceof Player player) {
-            sender.sendMessage(translate(player, component));
-            return;
-        }
-        super.send(sender, component);
+    protected Audience audience(Player subject) {
+        return adventure.player(subject);
+    }
+
+    @Override
+    protected Locale locale(Player subject) {
+        return Locale.forLanguageTag(subject.getLocale());
     }
 
     // LOAD VALUES
@@ -130,4 +107,5 @@ public class SpigotNamespace extends StandardNamespace {
             throw new RuntimeException("Cannot traverse files of given path.", e);
         }
     }
+
 }

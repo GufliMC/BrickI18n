@@ -1,6 +1,7 @@
 package com.guflimc.brick.i18n.spigot.api.namespace;
 
 import com.guflimc.brick.i18n.api.NamespaceRegistry;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -18,8 +19,8 @@ public class SpigotNamespaceRegistry implements NamespaceRegistry<SpigotNamespac
 
     private final Map<String, SpigotNamespace> namespaces = new HashMap<>();
 
-    public SpigotNamespaceRegistry() {
-        register(new SpigotNamespace("global", Locale.ENGLISH));
+    public SpigotNamespaceRegistry(JavaPlugin plugin) {
+        register(new SpigotNamespace("global", plugin, Locale.ENGLISH));
     }
 
     @Override

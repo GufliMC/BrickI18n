@@ -9,9 +9,7 @@ public class SpigotBrickI18n extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("Enabling " + nameAndVersion() + ".");
-
-        SpigotNamespaceRegistry registry = new SpigotNamespaceRegistry();
+        SpigotNamespaceRegistry registry = new SpigotNamespaceRegistry(this);
         SpigotI18nAPI.setNamespaceRegistry(registry);
 
         // global namespace

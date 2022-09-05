@@ -1,11 +1,10 @@
 package com.guflimc.brick.i18n.minestom.api.namespace;
 
-import com.guflimc.brick.i18n.api.namespace.StandardNamespace;
-import com.guflimc.brick.i18n.minestom.api.MinestomI18nAPI;
+import com.guflimc.brick.i18n.api.namespace.ExtendedNamespace;
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.minestom.server.adventure.Localizable;
+import net.minestom.server.entity.Player;
 import net.minestom.server.extensions.Extension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +21,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.stream.Stream;
 
-public class MinestomNamespace extends StandardNamespace {
+public class MinestomNamespace extends ExtendedNamespace<Player> {
 
     private final Logger LOGGER = LoggerFactory.getLogger(MinestomNamespace.class);
 
@@ -34,41 +33,24 @@ public class MinestomNamespace extends StandardNamespace {
         super(extension.getOrigin().getName(), defaultLocale);
     }
 
-    // Localizable support
+    //
 
-    public Component translate(Localizable localizable, TranslatableComponent component) {
-        return translate(localizable.getLocale(), component);
+    @Override
+    protected Audience audience(Player subject) {
+        return subject;
     }
 
-    public final Component translate(Localizable localizable, String key) {
-        return translate(localizable, Component.translatable(key));
-    }
-
-    public final Component translate(Localizable localizable, String key, Object... args) {
-        return translate(localizable, translatable(key, args));
-    }
-
-    public final Component translate(Localizable localizable, String key, Component... args) {
-        return translate(localizable, translatable(key, args));
+    @Override
+    protected Locale locale(Player subject) {
+        return subject.getLocale();
     }
 
     // override
 
     @Override
-    public Component translate(Locale locale, TranslatableComponent component) {
-        if (registry.contains(component.key()) ) {
-            return renderer.render(component, locale);
-        }
-        if ( id.equals("global") ) {
-            return Component.text("");
-        }
-        return MinestomI18nAPI.global().translate(locale, component);
-    }
-
-    @Override
     public void send(Audience sender, TranslatableComponent component) {
-        if ( sender instanceof Localizable localizable) {
-            sender.sendMessage(translate(localizable, component));
+        if (sender instanceof Player p) {
+            sender.sendMessage(translate(p, component));
             return;
         }
         super.send(sender, component);

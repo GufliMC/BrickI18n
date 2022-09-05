@@ -49,12 +49,13 @@ public class StandardNamespace {
         return id;
     }
 
-    public Component translate(Locale locale, TranslatableComponent component) {
+    public final Component translate(Locale locale, TranslatableComponent component) {
         if (registry.contains(component.key()) ) {
             return renderer.render(component, locale);
         }
         if ( I18nAPI.global() == this ) {
-            return Component.text("null - message does not exist.", NamedTextColor.RED);
+            return Component.text("ERROR: missing message key ", NamedTextColor.RED)
+                    .append(Component.text(component.key(), NamedTextColor.DARK_RED));
         }
 
         return I18nAPI.global().translate(locale, component);
@@ -72,20 +73,20 @@ public class StandardNamespace {
         return translate(locale, translatable(key, args));
     }
 
-    public void send(Audience sender, TranslatableComponent component) {
-        sender.sendMessage(translate(defaultLocale, component));
+    public void send(Audience audience, TranslatableComponent component) {
+        audience.sendMessage(translate(defaultLocale, component));
     }
 
-    public final void send(Audience sender, String key) {
-        send(sender, Component.translatable(key));
+    public final void send(Audience audience, String key) {
+        send(audience, Component.translatable(key));
     }
 
-    public final void send(Audience sender, String key, Object... args) {
-        send(sender, translatable(key, args));
+    public final void send(Audience audience, String key, Object... args) {
+        send(audience, translatable(key, args));
     }
 
-    public final void send(Audience sender, String key, Component... args) {
-        send(sender, translatable(key, args));
+    public final void send(Audience audience, String key, Component... args) {
+        send(audience, translatable(key, args));
     }
 
     protected final TranslatableComponent translatable(String key, Object... args) {
