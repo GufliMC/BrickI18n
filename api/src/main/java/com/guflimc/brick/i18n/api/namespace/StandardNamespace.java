@@ -6,12 +6,16 @@ import com.google.gson.JsonParser;
 import com.guflimc.brick.i18n.api.I18nAPI;
 import com.guflimc.brick.i18n.api.objectmapper.ObjectMapper;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.JoinConfiguration;
 import net.kyori.adventure.text.TranslatableComponent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.kyori.adventure.translation.TranslationRegistry;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,10 +24,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.text.MessageFormat;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class StandardNamespace {
 
@@ -43,6 +47,10 @@ public class StandardNamespace {
         this.registry.defaultLocale(defaultLocale);
     }
 
+    private Locale locale(Audience audience) {
+        return audience.pointers().get(Identity.LOCALE).orElse(defaultLocale);
+    }
+
     // api
 
     public final String id() {
@@ -50,10 +58,10 @@ public class StandardNamespace {
     }
 
     public final Component translate(Locale locale, TranslatableComponent component) {
-        if (registry.contains(component.key()) ) {
+        if (registry.contains(component.key())) {
             return renderer.render(component, locale);
         }
-        if ( I18nAPI.global() == this ) {
+        if (I18nAPI.global() == this) {
             return Component.text("ERROR: missing message key ", NamedTextColor.RED)
                     .append(Component.text(component.key(), NamedTextColor.DARK_RED));
         }
@@ -73,8 +81,28 @@ public class StandardNamespace {
         return translate(locale, translatable(key, args));
     }
 
+    //
+
+    public final Component translate(Audience audience, TranslatableComponent component) {
+        return translate(locale(audience), component);
+    }
+
+    public final Component translate(Audience audience, String key) {
+        return translate(locale(audience), key);
+    }
+
+    public final Component translate(Audience audience, String key, Object... args) {
+        return translate(locale(audience), key, args);
+    }
+
+    public final Component translate(Audience audience, String key, Component... args) {
+        return translate(locale(audience), key, args);
+    }
+
+    //
+
     public void send(Audience audience, TranslatableComponent component) {
-        audience.sendMessage(translate(defaultLocale, component));
+        audience.sendMessage(translate(locale(audience), component));
     }
 
     public final void send(Audience audience, String key) {
@@ -89,10 +117,12 @@ public class StandardNamespace {
         send(audience, translatable(key, args));
     }
 
+    //
+
     protected final TranslatableComponent translatable(String key, Object... args) {
         Component[] cargs = new Component[args.length];
-        for ( int i = 0; i < args.length; i++ ) {
-            if ( args[i] == null ) {
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] == null) {
                 cargs[i] = Component.text("null");
                 continue;
             }
@@ -111,6 +141,65 @@ public class StandardNamespace {
         }
 
         return Component.translatable(key).args(args);
+    }
+
+    //
+
+    public final Component hoverable(Locale locale, @NotNull String msgKey, @NotNull String hoverKey) {
+        return translate(locale, msgKey).hoverEvent(HoverEvent.showText(translate(locale, hoverKey)));
+    }
+
+    public final Component hoverable(Audience audience, @NotNull String msgKey, @NotNull String hoverKey) {
+        return hoverable(locale(audience), msgKey, hoverKey);
+    }
+
+    //
+
+    public final Component center(Component... components) {
+        return center(60, components);
+    }
+
+    public final Component center(int chatWidth, Component... components) {
+        if (components.length == 0) {
+            return Component.text("");
+        }
+
+        IntStream stream = Arrays.stream(components).mapToInt(this::length);
+
+        int max = stream.max().getAsInt();
+        int length = stream.sum();
+        int air = chatWidth - length;
+
+        int gap = Math.max(1, air / (components.length + 1));
+
+        Component result = Component.text("");
+        for (Component component : components) {
+            int diff = Math.max(0, max - length(component)) / 2;
+            result = result.append(Component.text(" ".repeat(gap + diff)));
+            result = result.append(component);
+            result = result.append(Component.text(" ".repeat(gap + diff)));
+        }
+
+        return result;
+    }
+
+    public final int length(Component component) {
+        return PlainTextComponentSerializer.plainText().serialize(component).length();
+    }
+
+    public final void menu(Audience audience, Component... components) {
+        menu(audience, '-', NamedTextColor.WHITE, components);
+    }
+
+    public final void menu(Audience audience, char borderShape, TextColor borderColor, Component... components) {
+        int length = Math.min(60, Arrays.stream(components).mapToInt(this::length).max().getAsInt());
+        Component border = Component.text((borderShape + "").repeat(length), borderColor);
+
+        audience.sendMessage(border);
+        for (Component component : components) {
+            audience.sendMessage(component);
+        }
+        audience.sendMessage(border);
     }
 
     // LOADING

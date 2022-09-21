@@ -1,20 +1,14 @@
 package com.guflimc.brick.i18n.spigot.api.namespace;
 
 import com.guflimc.brick.i18n.api.namespace.ExtendedNamespace;
-import com.guflimc.brick.i18n.api.namespace.StandardNamespace;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.platform.bukkit.BukkitComponentSerializer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +19,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.stream.Stream;
 
 public class SpigotNamespace extends ExtendedNamespace<Player> {
