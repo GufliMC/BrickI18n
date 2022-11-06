@@ -22,6 +22,7 @@ bukkit {
     description = 'Simple and lightweight internationalisation library for mc 1.18+'
     author = 'GufliMC'
     website = 'https://github.com/GufliMC/BrickI18n'
+    apiVersion = '1.18'
 }
 
 // I want it nice like that
