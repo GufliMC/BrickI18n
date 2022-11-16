@@ -134,11 +134,11 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final net.kyori.adventure.text.Component</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#center(int,net.kyori.adventure.text.Component...)" class="member-name-link">center</a><wbr>(int&nbsp;chatWidth,
- net.kyori.adventure.text.Component...&nbsp;components)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#center(int,net.kyori.adventure.text.Component)" class="member-name-link">center</a><wbr>(int&nbsp;width,
+ net.kyori.adventure.text.Component&nbsp;component)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final net.kyori.adventure.text.Component</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#center(net.kyori.adventure.text.Component...)" class="member-name-link">center</a><wbr>(net.kyori.adventure.text.Component...&nbsp;components)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#center(net.kyori.adventure.text.Component)" class="member-name-link">center</a><wbr>(net.kyori.adventure.text.Component&nbsp;component)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final net.kyori.adventure.text.Component</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hoverable(java.util.Locale,java.lang.String,java.lang.String)" class="member-name-link">hoverable</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Locale.html" title="class or interface in java.util" class="external-link">Locale</a>&nbsp;locale,
@@ -175,6 +175,13 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#menu(net.kyori.adventure.audience.Audience,net.kyori.adventure.text.Component...)" class="member-name-link">menu</a><wbr>(net.kyori.adventure.audience.Audience&nbsp;audience,
  net.kyori.adventure.text.Component...&nbsp;components)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final net.kyori.adventure.text.Component</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paddingAround(int,net.kyori.adventure.text.Component...)" class="member-name-link">paddingAround</a><wbr>(int&nbsp;width,
+ net.kyori.adventure.text.Component...&nbsp;components)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final net.kyori.adventure.text.Component</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paddingAround(net.kyori.adventure.text.Component...)" class="member-name-link">paddingAround</a><wbr>(net.kyori.adventure.text.Component...&nbsp;components)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#send(net.kyori.adventure.audience.Audience,java.lang.String)" class="member-name-link">send</a><wbr>(net.kyori.adventure.audience.Audience&nbsp;audience,
@@ -433,16 +440,29 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="center(net.kyori.adventure.text.Component...)">
-<h3>center</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">net.kyori.adventure.text.Component</span>&nbsp;<span class="element-name">center</span><wbr><span class="parameters">(net.kyori.adventure.text.Component...&nbsp;components)</span></div>
+<section class="detail" id="paddingAround(net.kyori.adventure.text.Component...)">
+<h3>paddingAround</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">net.kyori.adventure.text.Component</span>&nbsp;<span class="element-name">paddingAround</span><wbr><span class="parameters">(net.kyori.adventure.text.Component...&nbsp;components)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="center(int,net.kyori.adventure.text.Component...)">
-<h3>center</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">net.kyori.adventure.text.Component</span>&nbsp;<span class="element-name">center</span><wbr><span class="parameters">(int&nbsp;chatWidth,
+<section class="detail" id="paddingAround(int,net.kyori.adventure.text.Component...)">
+<h3>paddingAround</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">net.kyori.adventure.text.Component</span>&nbsp;<span class="element-name">paddingAround</span><wbr><span class="parameters">(int&nbsp;width,
  net.kyori.adventure.text.Component...&nbsp;components)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="center(net.kyori.adventure.text.Component)">
+<h3>center</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">net.kyori.adventure.text.Component</span>&nbsp;<span class="element-name">center</span><wbr><span class="parameters">(net.kyori.adventure.text.Component&nbsp;component)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="center(int,net.kyori.adventure.text.Component)">
+<h3>center</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">net.kyori.adventure.text.Component</span>&nbsp;<span class="element-name">center</span><wbr><span class="parameters">(int&nbsp;width,
+ net.kyori.adventure.text.Component&nbsp;component)</span></div>
 </section>
 </li>
 <li>
