@@ -24,10 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Map;
-import java.util.stream.IntStream;
+import java.util.*;
 
 public class StandardNamespace {
 
@@ -155,20 +152,24 @@ public class StandardNamespace {
 
     //
 
-    public final Component center(Component... components) {
-        return center(60, components);
+    private static final int DEFAULT_CHAT_WIDTH = 50;
+
+    public final Component paddingAround(Component... components) {
+        return paddingAround(DEFAULT_CHAT_WIDTH, components);
     }
 
-    public final Component center(int chatWidth, Component... components) {
+    public final Component paddingAround(int width, Component... components) {
         if (components.length == 0) {
             return Component.text("");
         }
 
-        IntStream stream = Arrays.stream(components).mapToInt(this::length);
+        IntSummaryStatistics stream = Arrays.stream(components)
+                .mapToInt(this::length)
+                .summaryStatistics();
 
-        int max = stream.max().getAsInt();
-        int length = stream.sum();
-        int air = chatWidth - length;
+        int max = stream.getMax();
+        int length = (int) stream.getSum();
+        int air = width - length;
 
         int gap = Math.max(1, air / (components.length + 1));
 
@@ -183,23 +184,53 @@ public class StandardNamespace {
         return result;
     }
 
+    public final Component center(Component component) {
+        return center(DEFAULT_CHAT_WIDTH, component);
+    }
+
+    public final Component center(int width, Component component) {
+        int length = Math.min(DEFAULT_CHAT_WIDTH, length(component));
+        int air = width - length;
+        int gap = Math.max(0, air / 2);
+
+        Component spacing = Component.text(" ".repeat(gap));
+        return spacing.append(component).append(spacing);
+    }
+
     public final int length(Component component) {
-        return PlainTextComponentSerializer.plainText().serialize(component).length();
+        return width(PlainTextComponentSerializer.plainText().serialize(component));
     }
 
     public final void menu(Audience audience, Component... components) {
-        menu(audience, '-', NamedTextColor.WHITE, components);
+        menu(audience, '-', NamedTextColor.GRAY, components);
     }
 
     public final void menu(Audience audience, char borderShape, TextColor borderColor, Component... components) {
-        int length = Math.min(60, Arrays.stream(components).mapToInt(this::length).max().getAsInt());
+        int length = Math.min(DEFAULT_CHAT_WIDTH, Arrays.stream(components).mapToInt(this::length).max().orElse(0) + 4);
         Component border = Component.text((borderShape + "").repeat(length), borderColor);
 
         audience.sendMessage(border);
         for (Component component : components) {
-            audience.sendMessage(component);
+            audience.sendMessage(center(length, component));
         }
         audience.sendMessage(border);
+    }
+
+    private static final Map<Character, Double> WIDTHS = new HashMap<>();
+    static {
+        "[]{} ".chars().forEach(i -> {
+            WIDTHS.put((char) i, 0.57d);
+        });
+        "fkt".chars().forEach(i -> {
+            WIDTHS.put((char) i, 0.71d);
+        });
+        "il.;,!'".chars().forEach(i -> {
+            WIDTHS.put((char) i, 0.21d);
+        });
+    }
+
+    private static int width(String str) {
+        return (int) Math.ceil(str.chars().mapToDouble(i -> WIDTHS.getOrDefault((char) i, 1d)).sum());
     }
 
     // LOADING
