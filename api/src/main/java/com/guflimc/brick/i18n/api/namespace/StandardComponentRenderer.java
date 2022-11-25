@@ -34,7 +34,8 @@ public abstract class StandardComponentRenderer extends TranslatableComponentRen
             return Component.text(component.key());
         }
 
-        Component result = MiniMessage.miniMessage().deserialize(format.toPattern());
+        String x = format.format(new Object[0]);
+        Component result = MiniMessage.miniMessage().deserialize(x);
         final List<Component> args = component.args();
         for (int i = 0; i < args.size(); i++) {
             final int index = i;

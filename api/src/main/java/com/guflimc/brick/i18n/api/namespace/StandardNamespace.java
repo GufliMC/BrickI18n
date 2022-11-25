@@ -262,7 +262,7 @@ public class StandardNamespace {
             JsonObject config = JsonParser.parseReader(isr).getAsJsonObject();
             for (Map.Entry<String, JsonElement> entry : config.entrySet()) {
                 if (!registry.contains(entry.getKey())) {
-                    registry.register(entry.getKey(), locale, new MessageFormat(entry.getValue().getAsString()));
+                    registry.register(entry.getKey(), locale, new MessageFormat(entry.getValue().getAsString(), locale));
                 }
             }
         }
