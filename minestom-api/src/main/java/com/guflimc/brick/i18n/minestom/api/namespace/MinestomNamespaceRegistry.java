@@ -27,7 +27,7 @@ public class MinestomNamespaceRegistry implements NamespaceRegistry<MinestomName
 
     @Override
     public MinestomNamespace byId(@NotNull String namespace) {
-        if ( namespaces.containsKey(namespace) ) {
+        if (namespaces.containsKey(namespace)) {
             return namespaces.get(namespace);
         }
         return namespaces.get("global"); // default
@@ -35,8 +35,13 @@ public class MinestomNamespaceRegistry implements NamespaceRegistry<MinestomName
 
     @Override
     public MinestomNamespace byObject(@NotNull Object object) {
-        ClassLoader classLoader = object.getClass().getClassLoader();
-        if ( classLoader instanceof ExtensionClassLoader ecl ) {
+        return byClass(object.getClass());
+    }
+
+    @Override
+    public MinestomNamespace byClass(@NotNull Class<?> clazz) {
+        ClassLoader classLoader = clazz.getClassLoader();
+        if (classLoader instanceof ExtensionClassLoader ecl) {
             return byId(ecl.getName().substring(4));
         }
         return namespaces.get("global"); // default

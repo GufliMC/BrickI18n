@@ -11,4 +11,5 @@ public interface NamespaceRegistry<T extends StandardNamespace> {
 
     T byObject(@NotNull Object object);
 
+    T byClass(@NotNull Class<?> clazz);
 }

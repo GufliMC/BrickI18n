@@ -34,4 +34,8 @@ public class I18nAPI {
         return get().byObject(object);
     }
 
+    public static StandardNamespace get(Class<?> clazz) {
+        return get().byClass(clazz);
+    }
+
 }
