@@ -6,34 +6,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
-public class SpigotNamespaceRegistry implements NamespaceRegistry<SpigotNamespace> {
-
-    private final Map<String, SpigotNamespace> namespaces = new HashMap<>();
+public class SpigotNamespaceRegistry extends NamespaceRegistry<SpigotNamespace> {
 
     public SpigotNamespaceRegistry(JavaPlugin plugin) {
         register(new SpigotNamespace("global", plugin, Locale.ENGLISH));
-    }
-
-    @Override
-    public void register(@NotNull SpigotNamespace namespace) {
-        namespaces.put(namespace.id(), namespace);
-    }
-
-    @Override
-    public SpigotNamespace byId(@NotNull String namespace) {
-        if (namespaces.containsKey(namespace)) {
-            return namespaces.get(namespace);
-        }
-        return namespaces.get("global"); // default
-    }
-
-    @Override
-    public SpigotNamespace byObject(@NotNull Object object) {
-        return byClass(object.getClass());
     }
 
     @Override
@@ -43,7 +21,7 @@ public class SpigotNamespaceRegistry implements NamespaceRegistry<SpigotNamespac
                 .filter(plugin -> plugin.getClass().getClassLoader().equals(classLoader))
                 .findAny()
                 .map(plugin -> byId(plugin.getName()))
-                .orElse(namespaces.get("global"));
+                .orElse(byId("global"));
     }
 
     public SpigotNamespace byPlugin(JavaPlugin plugin) {

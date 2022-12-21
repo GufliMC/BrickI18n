@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.guflimc.brick.i18n.api.I18nAPI;
 import com.guflimc.brick.i18n.api.objectmapper.ObjectMapper;
+import com.guflimc.brick.i18n.api.time.DurationFormatter;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
@@ -24,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.text.MessageFormat;
+import java.time.Duration;
 import java.util.*;
 
 public class StandardNamespace {
@@ -217,6 +219,7 @@ public class StandardNamespace {
     }
 
     private static final Map<Character, Double> WIDTHS = new HashMap<>();
+
     static {
         "[]{} ".chars().forEach(i -> {
             WIDTHS.put((char) i, 0.57d);
@@ -231,6 +234,49 @@ public class StandardNamespace {
 
     private static int width(String str) {
         return (int) Math.ceil(str.chars().mapToDouble(i -> WIDTHS.getOrDefault((char) i, 1d)).sum());
+    }
+
+    // TIME
+
+    private final Map<String, String> units = Map.of(
+            "y", "year",
+            "m", "month",
+            "d", "day",
+            "H", "hour",
+            "M", "minute",
+            "S", "second");
+
+    public final Component translate(Locale locale, Duration duration, DurationFormatter formatter) {
+        String formatted = formatter.format(duration);
+        Component result = Component.text(formatted);
+        result = result.replaceText(b -> b.matchLiteral(" ").replacement(", "));
+
+        for (String unit : units.keySet()) {
+            String key;
+            if (formatted.startsWith("1" + unit) || formatted.contains(" 1" + unit)) {
+                key = units.get(unit);
+            } else {
+                key = units.get(unit) + "s";
+            }
+            result = result.replaceText(b -> b.match("([0-9]+)" + unit)
+                    .replacement((m, n) -> Component.text(m.group(1) + " ")
+                            .append(translate(locale, "time." + key))));
+        }
+
+        return result;
+
+    }
+
+    public final Component translate(Locale locale, Duration duration) {
+        return translate(locale, duration, DurationFormatter.COMPACT);
+    }
+
+    public final Component translate(Audience audience, Duration duration, DurationFormatter formatter) {
+        return translate(locale(audience), duration, formatter);
+    }
+
+    public final Component translate(Audience audience, Duration duration) {
+        return translate(audience, duration, DurationFormatter.COMPACT);
     }
 
     // LOADING

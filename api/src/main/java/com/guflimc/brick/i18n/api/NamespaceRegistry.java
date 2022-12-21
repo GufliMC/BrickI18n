@@ -3,13 +3,31 @@ package com.guflimc.brick.i18n.api;
 import com.guflimc.brick.i18n.api.namespace.StandardNamespace;
 import org.jetbrains.annotations.NotNull;
 
-public interface NamespaceRegistry<T extends StandardNamespace> {
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-    void register(@NotNull T namespace);
+public class NamespaceRegistry<T extends StandardNamespace> {
 
-    T byId(@NotNull String namespace);
+    private final Map<String, T> namespaces = new HashMap<>();
 
-    T byObject(@NotNull Object object);
+    public final void register(@NotNull T namespace) {
+        namespaces.put(namespace.id(), namespace);
+    }
 
-    T byClass(@NotNull Class<?> clazz);
+    public final T byId(@NotNull String namespace) {
+        if (namespaces.containsKey(namespace)) {
+            return namespaces.get(namespace);
+        }
+        return namespaces.get("global"); // default
+    }
+
+    public T byObject(@NotNull Object object) {
+        return byClass(object.getClass());
+    }
+
+    public T byClass(@NotNull Class<?> clazz) {
+        throw new UnsupportedOperationException("This operation is not available in the standard registry.");
+    }
+
 }

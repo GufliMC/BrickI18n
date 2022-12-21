@@ -6,36 +6,12 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
-public class MinestomNamespaceRegistry implements NamespaceRegistry<MinestomNamespace> {
-
-    private final Logger LOGGER = LoggerFactory.getLogger(MinestomNamespaceRegistry.class);
-
-    private final Map<String, MinestomNamespace> namespaces = new HashMap<>();
+public class MinestomNamespaceRegistry extends NamespaceRegistry<MinestomNamespace> {
 
     public MinestomNamespaceRegistry() {
         register(new MinestomNamespace("global", Locale.ENGLISH));
-    }
-
-    @Override
-    public void register(@NotNull MinestomNamespace namespace) {
-        namespaces.put(namespace.id(), namespace);
-    }
-
-    @Override
-    public MinestomNamespace byId(@NotNull String namespace) {
-        if (namespaces.containsKey(namespace)) {
-            return namespaces.get(namespace);
-        }
-        return namespaces.get("global"); // default
-    }
-
-    @Override
-    public MinestomNamespace byObject(@NotNull Object object) {
-        return byClass(object.getClass());
     }
 
     @Override
@@ -44,7 +20,7 @@ public class MinestomNamespaceRegistry implements NamespaceRegistry<MinestomName
         if (classLoader instanceof ExtensionClassLoader ecl) {
             return byId(ecl.getName().substring(4));
         }
-        return namespaces.get("global"); // default
+        return byId("global"); // default
     }
 
 }

@@ -1,3 +1,16 @@
 {
-  "test.message": "<red>Hey {0}!"
+  "test.message": "<red>Hey {0}!",
+
+  "time.year": "year",
+  "time.years": "years",
+  "time.month": "month",
+  "time.months": "months",
+  "time.day": "day",
+  "time.days": "days",
+  "time.hour": "hour",
+  "time.hours": "hours",
+  "time.minute": "minute",
+  "time.minutes": "minutes",
+  "time.second": "second",
+  "time.seconds": "seconds"
 }
