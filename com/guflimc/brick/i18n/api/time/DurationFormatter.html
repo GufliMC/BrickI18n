@@ -91,10 +91,42 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final <a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></code></div>
 <div class="col-second even-row-color"><code><a href="#COMPACT" class="member-name-link">COMPACT</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Compact format with period and duration.</div>
+</div>
 <div class="col-first odd-row-color"><code>static final <a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#COZY" class="member-name-link">COZY</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Cozy format with period and duration.</div>
+</div>
+<div class="col-first even-row-color"><code>static final <a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></code></div>
+<div class="col-second even-row-color"><code><a href="#DIGITAL" class="member-name-link">DIGITAL</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Digital clock format.</div>
+</div>
+<div class="col-first odd-row-color"><code>static final <a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#HIGHEST" class="member-name-link">HIGHEST</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Format only the highest unit of value.</div>
+</div>
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#SKIP_OUT_OF_LOWER_BOUND" class="member-name-link">SKIP_OUT_OF_LOWER_BOUND</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">A value of a temporal field will not be formatted in the final result if the temporal field's value and any
+ subsequent temporal field's value in the format for the given temporal amount is zero.</div>
+</div>
+<div class="col-first odd-row-color"><code>static final int</code></div>
+<div class="col-second odd-row-color"><code><a href="#SKIP_OUT_OF_UPPER_BOUND" class="member-name-link">SKIP_OUT_OF_UPPER_BOUND</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">A value of a temporal field will not be formatted in the final result if the temporal amount is less than
+ the temporal field's base unit duration.</div>
+</div>
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#SKIP_ZERO" class="member-name-link">SKIP_ZERO</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">A value of a temporal field will not be formatted in the final result if the temporal field's value for
+ the given temporal amount is zero.</div>
+</div>
 </div>
 </section>
 </li>
@@ -130,15 +162,83 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="COMPACT">
-<h3>COMPACT</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></span>&nbsp;<span class="element-name">COMPACT</span></div>
+<section class="detail" id="SKIP_ZERO">
+<h3>SKIP_ZERO</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">SKIP_ZERO</span></div>
+<div class="block">A value of a temporal field will not be formatted in the final result if the temporal field's value for
+ the given temporal amount is zero.
+ e.g. if the temporal amount is 2 years and 17 days, the result will be "2y 17d" and not "2y 0m 17d".</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../../../constant-values.html#com.guflimc.brick.i18n.api.time.DurationFormatter.SKIP_ZERO">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="SKIP_OUT_OF_UPPER_BOUND">
+<h3>SKIP_OUT_OF_UPPER_BOUND</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">SKIP_OUT_OF_UPPER_BOUND</span></div>
+<div class="block">A value of a temporal field will not be formatted in the final result if the temporal amount is less than
+ the temporal field's base unit duration.
+ e.g. if the temporal amount is 3 months and 24 days, the result will be "3m 24d" and not "0y 3m 24d".</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../../../constant-values.html#com.guflimc.brick.i18n.api.time.DurationFormatter.SKIP_OUT_OF_UPPER_BOUND">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="SKIP_OUT_OF_LOWER_BOUND">
+<h3>SKIP_OUT_OF_LOWER_BOUND</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">SKIP_OUT_OF_LOWER_BOUND</span></div>
+<div class="block">A value of a temporal field will not be formatted in the final result if the temporal field's value and any
+ subsequent temporal field's value in the format for the given temporal amount is zero. This only applies when
+ at least one prior temporal field's value is non-zero.
+ e.g. if the temporal amount is 1 year and 7 months, the result will be "1y 7m" and not "1y 7m 0d".</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../../../constant-values.html#com.guflimc.brick.i18n.api.time.DurationFormatter.SKIP_OUT_OF_LOWER_BOUND">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="DIGITAL">
+<h3>DIGITAL</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></span>&nbsp;<span class="element-name">DIGITAL</span></div>
+<div class="block">Digital clock format. e.g. for 7 hours, 38 minutes and 12 seconds, the result will be "07:38:12".</div>
 </section>
 </li>
 <li>
 <section class="detail" id="COZY">
 <h3>COZY</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></span>&nbsp;<span class="element-name">COZY</span></div>
+<div class="block">Cozy format with period and duration. e.g. for 3 days and 38 minutes the result will be "3d 0H 38M".</div>
+</section>
+</li>
+<li>
+<section class="detail" id="COMPACT">
+<h3>COMPACT</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></span>&nbsp;<span class="element-name">COMPACT</span></div>
+<div class="block">Compact format with period and duration. e.g. for 3 days and 38 minutes the result will be "3d 38M".</div>
+</section>
+</li>
+<li>
+<section class="detail" id="HIGHEST">
+<h3>HIGHEST</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="DurationFormatter.html" title="class in com.guflimc.brick.i18n.api.time">DurationFormatter</a></span>&nbsp;<span class="element-name">HIGHEST</span></div>
+<div class="block">Format only the highest unit of value. e.g. for 7 months, 26 days and 22 hours the result will be "7m".</div>
 </section>
 </li>
 </ul>
