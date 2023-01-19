@@ -93,4 +93,15 @@ public class I18nTests {
         assertThrows(DateTimeParseException.class, () -> DurationParser.parse("2d zz"));
     }
 
+    @Test
+    public void maybeTranslateTest() {
+        Component translateThis = Component.text("Blah blah. ")
+                .append(Component.text("It's been time.years."));
+
+        Component translated = global.maybeTranslate(Locale.ENGLISH, translateThis);
+
+        String result = PlainTextComponentSerializer.plainText().serialize(translated);
+        assertEquals("Blah blah. It's been years.", result);
+    }
+
 }

@@ -60,4 +60,10 @@ public abstract class ExtendedNamespace<T> extends StandardNamespace {
         return hoverable(locale(subject), msgKey, hoverKey);
     }
 
+    //
+
+    public final Component maybeTranslate(T subject, Component component) {
+        return maybeTranslate(locale(subject), component);
+    }
+
 }

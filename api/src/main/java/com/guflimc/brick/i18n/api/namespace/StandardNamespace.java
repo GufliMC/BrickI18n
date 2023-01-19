@@ -10,6 +10,7 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -166,7 +167,7 @@ public class StandardNamespace {
         }
 
         IntSummaryStatistics stream = Arrays.stream(components)
-                .mapToInt(this::length)
+                .mapToInt(this::width)
                 .summaryStatistics();
 
         int max = stream.getMax();
@@ -177,7 +178,7 @@ public class StandardNamespace {
 
         Component result = Component.text("");
         for (Component component : components) {
-            int diff = Math.max(0, max - length(component)) / 2;
+            int diff = Math.max(0, max - width(component)) / 2;
             result = result.append(Component.text(" ".repeat(gap + diff)));
             result = result.append(component);
             result = result.append(Component.text(" ".repeat(gap + diff)));
@@ -191,7 +192,7 @@ public class StandardNamespace {
     }
 
     public final Component center(int width, Component component) {
-        int length = Math.min(DEFAULT_CHAT_WIDTH, length(component));
+        int length = Math.min(DEFAULT_CHAT_WIDTH, width(component));
         int air = width - length;
         int gap = Math.max(0, air / 2);
 
@@ -199,7 +200,7 @@ public class StandardNamespace {
         return spacing.append(component).append(spacing);
     }
 
-    public final int length(Component component) {
+    public final int width(Component component) {
         return width(PlainTextComponentSerializer.plainText().serialize(component));
     }
 
@@ -208,7 +209,7 @@ public class StandardNamespace {
     }
 
     public final void menu(Audience audience, char borderShape, TextColor borderColor, Component... components) {
-        int length = Math.min(DEFAULT_CHAT_WIDTH, Arrays.stream(components).mapToInt(this::length).max().orElse(0) + 4);
+        int length = Math.min(DEFAULT_CHAT_WIDTH, Arrays.stream(components).mapToInt(this::width).max().orElse(0) + 4);
         Component border = Component.text((borderShape + "").repeat(length), borderColor);
 
         audience.sendMessage(border);
@@ -246,6 +247,21 @@ public class StandardNamespace {
             "M", "minute",
             "S", "second");
 
+    /**
+     * This will replace the following time placeholders with their respective translation:
+     * <ul>
+     *     <li>y - time.year</li>
+     *     <li>m - time.month</li>
+     *     <li>d - time.day</li>
+     *     <li>H - time.hour</li>
+     *     <li>M - time.minute</li>
+     *     <li>S - time.second</li>
+     * </ul>
+     * @param locale the locale to use
+     * @param duration the duration to format
+     * @param formatter the formatter to use
+     * @return the translated and formatted duration
+     */
     public final Component translate(Locale locale, Duration duration, DurationFormatter formatter) {
         String formatted = formatter.format(duration);
         Component result = Component.text(formatted);
@@ -277,6 +293,34 @@ public class StandardNamespace {
 
     public final Component translate(Audience audience, Duration duration) {
         return translate(audience, duration, DurationFormatter.COMPACT);
+    }
+
+    //
+
+    /**
+     * Translates the component if the given parameter is a {@link TranslatableComponent}.
+     * Otherwise, this method will search the text of the given component and replace any
+     * keys that are found with its translation. It will then return the resulting component.
+     * If no keys are found, this will exactly return the given component.
+     *
+     * @param locale the locale to use for translation
+     * @param component the component to translate
+     * @return the translated component
+     */
+    public final Component maybeTranslate(Locale locale, Component component) {
+        if ( component instanceof TranslatableComponent tc ) {
+            return translate(locale, tc);
+        }
+        return component.replaceText(b -> b.match("([a-zA-Z0-9._\\-]+)([^.])").replacement((result, rb) -> {
+            if ( registry.contains(result.group(1)) ) {
+                return translate(locale, result.group(1)).append(Component.text(result.group(2)));
+            }
+            return rb;
+        }));
+    }
+
+    public final Component maybeTranslate(Audience audience, Component component) {
+        return maybeTranslate(locale(audience), component);
     }
 
     // LOADING
