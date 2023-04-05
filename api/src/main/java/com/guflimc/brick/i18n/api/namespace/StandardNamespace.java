@@ -10,7 +10,6 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -36,6 +35,8 @@ public class StandardNamespace {
     protected final String id;
 
     protected final StandardComponentRenderer renderer;
+
+    private final Map<String, Set<Locale>> registered = new HashMap<>();
 
     public StandardNamespace(String id, Locale defaultLocale) {
         final Key key = Key.key("i18n:" + id.toLowerCase());
@@ -257,8 +258,9 @@ public class StandardNamespace {
      *     <li>M - time.minute</li>
      *     <li>S - time.second</li>
      * </ul>
-     * @param locale the locale to use
-     * @param duration the duration to format
+     *
+     * @param locale    the locale to use
+     * @param duration  the duration to format
      * @param formatter the formatter to use
      * @return the translated and formatted duration
      */
@@ -303,16 +305,16 @@ public class StandardNamespace {
      * keys that are found with its translation. It will then return the resulting component.
      * If no keys are found, this will exactly return the given component.
      *
-     * @param locale the locale to use for translation
+     * @param locale    the locale to use for translation
      * @param component the component to translate
      * @return the translated component
      */
     public final Component maybeTranslate(Locale locale, Component component) {
-        if ( component instanceof TranslatableComponent tc ) {
+        if (component instanceof TranslatableComponent tc) {
             return translate(locale, tc);
         }
         return component.replaceText(b -> b.match("([a-zA-Z0-9._\\-]+)([^.])").replacement((result, rb) -> {
-            if ( registry.contains(result.group(1)) ) {
+            if (registry.contains(result.group(1))) {
                 return translate(locale, result.group(1)).append(Component.text(result.group(2)));
             }
             return rb;
@@ -351,9 +353,11 @@ public class StandardNamespace {
         ) {
             JsonObject config = JsonParser.parseReader(isr).getAsJsonObject();
             for (Map.Entry<String, JsonElement> entry : config.entrySet()) {
-                if (!registry.contains(entry.getKey())) {
-                    registry.register(entry.getKey(), locale, new MessageFormat(entry.getValue().getAsString(), locale));
-                }
+                Set<Locale> r = registered.computeIfAbsent(entry.getKey(), (k) -> new HashSet<>());
+                if (r.contains(locale)) continue;
+                r.add(locale);
+
+                registry.register(entry.getKey(), locale, new MessageFormat(entry.getValue().getAsString(), locale));
             }
         }
     }

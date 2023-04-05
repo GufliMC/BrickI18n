@@ -2,11 +2,13 @@ package com.guflimc.brick.i18n.spigot.api.namespace;
 
 import com.guflimc.brick.i18n.api.namespace.ExtendedNamespace;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.platform.bukkit.BukkitComponentSerializer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.translation.Translator;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
@@ -47,7 +49,8 @@ public class SpigotNamespace extends ExtendedNamespace<Player> {
 
     @Override
     protected Locale locale(Player subject) {
-        return Locale.forLanguageTag(subject.getLocale());
+        Locale locale = Translator.parseLocale(subject.getLocale());
+        return locale != null ? locale : defaultLocale;
     }
 
     //
@@ -106,7 +109,6 @@ public class SpigotNamespace extends ExtendedNamespace<Player> {
                     continue;
                 }
 
-
                 Path targetFile = plugin.getDataFolder().toPath().resolve(pathToResources).resolve(root.relativize(path).toString());
                 if (!targetFile.toFile().exists()) {
                     try (InputStream is = path.toUri().toURL().openStream()) {
@@ -115,7 +117,6 @@ public class SpigotNamespace extends ExtendedNamespace<Player> {
                     } catch (IOException ex) {
                         logger.warn("Cannot save packaged resource '" + path + "' of plugin '" + plugin.getName() + "'.");
                     }
-                    continue;
                 }
 
                 loadValues(path);

@@ -21,7 +21,7 @@ public abstract class StandardComponentRenderer extends TranslatableComponentRen
         requireNonNull(source, "source");
         return new StandardComponentRenderer() {
             @Override
-            protected @Nullable MessageFormat translate(final @NotNull String key, final @NotNull Locale context) {
+            protected @Nullable MessageFormat translate(final @NotNull String key, @NotNull Locale context) {
                 return source.translate(key, context);
             }
         };
