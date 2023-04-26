@@ -2,13 +2,13 @@ package com.guflimc.brick.i18n.spigot.api.namespace;
 
 import com.guflimc.brick.i18n.api.namespace.ExtendedNamespace;
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.platform.bukkit.BukkitComponentSerializer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.translation.Translator;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.stream.Stream;
 
-public class SpigotNamespace extends ExtendedNamespace<Player> {
+public class SpigotNamespace extends ExtendedNamespace<CommandSender> {
 
     private static final Logger logger = LoggerFactory.getLogger(SpigotNamespace.class);
 
@@ -43,14 +43,20 @@ public class SpigotNamespace extends ExtendedNamespace<Player> {
     }
 
     @Override
-    protected Audience audience(Player subject) {
-        return adventure.player(subject);
+    protected Audience audience(CommandSender subject) {
+        if ( subject instanceof Player p ) {
+            return adventure.player(p);
+        }
+        return adventure.sender(subject);
     }
 
     @Override
-    protected Locale locale(Player subject) {
-        Locale locale = Translator.parseLocale(subject.getLocale());
-        return locale != null ? locale : defaultLocale;
+    protected Locale locale(CommandSender subject) {
+        if ( subject instanceof Player p ) {
+            Locale locale = Translator.parseLocale(p.getLocale());
+            return locale != null ? locale : defaultLocale;
+        }
+        return defaultLocale;
     }
 
     //
