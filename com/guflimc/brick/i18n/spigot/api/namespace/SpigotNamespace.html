@@ -72,7 +72,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance"><a href="../../../api/namespace/StandardNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">com.guflimc.brick.i18n.api.namespace.StandardNamespace</a>
-<div class="inheritance"><a href="../../../api/namespace/ExtendedNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">com.guflimc.brick.i18n.api.namespace.ExtendedNamespace</a>&lt;org.bukkit.entity.Player&gt;
+<div class="inheritance"><a href="../../../api/namespace/ExtendedNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">com.guflimc.brick.i18n.api.namespace.ExtendedNamespace</a>&lt;org.bukkit.command.CommandSender&gt;
 <div class="inheritance">com.guflimc.brick.i18n.spigot.api.namespace.SpigotNamespace</div>
 </div>
 </div>
@@ -80,7 +80,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpigotNamespace</span>
-<span class="extends-implements">extends <a href="../../../api/namespace/ExtendedNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">ExtendedNamespace</a>&lt;org.bukkit.entity.Player&gt;</span></div>
+<span class="extends-implements">extends <a href="../../../api/namespace/ExtendedNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">ExtendedNamespace</a>&lt;org.bukkit.command.CommandSender&gt;</span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -119,14 +119,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected net.kyori.adventure.audience.Audience</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#audience(org.bukkit.entity.Player)" class="member-name-link">audience</a><wbr>(org.bukkit.entity.Player&nbsp;subject)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#audience(org.bukkit.command.CommandSender)" class="member-name-link">audience</a><wbr>(org.bukkit.command.CommandSender&nbsp;subject)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadValues(org.bukkit.plugin.java.JavaPlugin,java.lang.String)" class="member-name-link">loadValues</a><wbr>(org.bukkit.plugin.java.JavaPlugin&nbsp;plugin,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pathToResources)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Locale.html" title="class or interface in java.util" class="external-link">Locale</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#locale(org.bukkit.entity.Player)" class="member-name-link">locale</a><wbr>(org.bukkit.entity.Player&nbsp;subject)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#locale(org.bukkit.command.CommandSender)" class="member-name-link">locale</a><wbr>(org.bukkit.command.CommandSender&nbsp;subject)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#string(org.bukkit.entity.Player,java.lang.String)" class="member-name-link">string</a><wbr>(org.bukkit.entity.Player&nbsp;subject,
@@ -185,22 +185,22 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="audience(org.bukkit.entity.Player)">
+<section class="detail" id="audience(org.bukkit.command.CommandSender)">
 <h3>audience</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">net.kyori.adventure.audience.Audience</span>&nbsp;<span class="element-name">audience</span><wbr><span class="parameters">(org.bukkit.entity.Player&nbsp;subject)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">net.kyori.adventure.audience.Audience</span>&nbsp;<span class="element-name">audience</span><wbr><span class="parameters">(org.bukkit.command.CommandSender&nbsp;subject)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../../../api/namespace/ExtendedNamespace.html#audience(T)">audience</a></code>&nbsp;in class&nbsp;<code><a href="../../../api/namespace/ExtendedNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">ExtendedNamespace</a>&lt;org.bukkit.entity.Player&gt;</code></dd>
+<dd><code><a href="../../../api/namespace/ExtendedNamespace.html#audience(T)">audience</a></code>&nbsp;in class&nbsp;<code><a href="../../../api/namespace/ExtendedNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">ExtendedNamespace</a>&lt;org.bukkit.command.CommandSender&gt;</code></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="locale(org.bukkit.entity.Player)">
+<section class="detail" id="locale(org.bukkit.command.CommandSender)">
 <h3>locale</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Locale.html" title="class or interface in java.util" class="external-link">Locale</a></span>&nbsp;<span class="element-name">locale</span><wbr><span class="parameters">(org.bukkit.entity.Player&nbsp;subject)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Locale.html" title="class or interface in java.util" class="external-link">Locale</a></span>&nbsp;<span class="element-name">locale</span><wbr><span class="parameters">(org.bukkit.command.CommandSender&nbsp;subject)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../../../api/namespace/ExtendedNamespace.html#locale(T)">locale</a></code>&nbsp;in class&nbsp;<code><a href="../../../api/namespace/ExtendedNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">ExtendedNamespace</a>&lt;org.bukkit.entity.Player&gt;</code></dd>
+<dd><code><a href="../../../api/namespace/ExtendedNamespace.html#locale(T)">locale</a></code>&nbsp;in class&nbsp;<code><a href="../../../api/namespace/ExtendedNamespace.html" title="class in com.guflimc.brick.i18n.api.namespace">ExtendedNamespace</a>&lt;org.bukkit.command.CommandSender&gt;</code></dd>
 </dl>
 </section>
 </li>
