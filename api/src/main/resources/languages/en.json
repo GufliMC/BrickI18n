@@ -2,6 +2,9 @@
   "cmd.error.permission": "<red>You don't have permission for this command.",
   "cmd.error.player-only": "<red>This command can only be executed by a player.",
   "cmd.error.console-only": "<red>This command can only be executed by the console.",
+  "cmd.error.notfound": "<red>Command not found: <dark_red>{0}<red>.",
+  "cmd.error.parameter": "<red>The value <dark_red>{0} <red>is invalid for parameter <dark_red>{1}<red>.",
+  "cmd.error.unexpected": "<red>An unexpected error occured, check the console for more information.",
 
   "cmd.error.args": "<dark_red>{1} <red>is not a valid <dark_red>{0}<red>.",
   "cmd.error.args.player": "<red>The player <dark_red>{0} <red>is not online.",
