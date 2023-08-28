@@ -35,32 +35,32 @@ public class ObjectMapper<T> {
         return Component.text(object.toString());
     }
 
-    public static void register(ObjectMapper<?> mapper) {
-        mappers.add(mapper);
+    public static <T> void register(Class<T> type, Function<T, Component> mapper) {
+        mappers.add(new ObjectMapper<>(type, mapper));
     }
 
     //
 
     static {
         // component
-        register(new ObjectMapper<>(Component.class, Function.identity()));
+        register(Component.class, Function.identity());
 
         // strings
-        register(new ObjectMapper<>(String.class, Component::text));
+        register(String.class, Component::text);
 
         // collections
         JoinConfiguration joinConfiguration = JoinConfiguration.separator(Component.text(", ", NamedTextColor.GRAY));
-        register(new ObjectMapper<>(Collection.class, coll -> {
+        register(Collection.class, coll -> {
             if ( coll.isEmpty() ) {
                 return Component.text("[]");
             }
 
-            Collection<Component> components = (Collection<Component>) coll.stream()
+            Collection<Component> components = ((Collection<?>) coll).stream()
                     .map(ObjectMapper::map)
                     .collect(Collectors.toList());
 
             return Component.join(joinConfiguration, components);
-        }));
+        });
     }
 
     //
@@ -68,7 +68,7 @@ public class ObjectMapper<T> {
     private final Class<T> type;
     private final Function<T, Component> mapper;
 
-    public ObjectMapper(Class<T> type, Function<T, Component> mapper) {
+    private ObjectMapper(Class<T> type, Function<T, Component> mapper) {
         this.type = type;
         this.mapper = mapper;
     }
